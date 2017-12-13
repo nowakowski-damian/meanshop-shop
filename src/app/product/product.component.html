@@ -1,0 +1,20 @@
+
+<div class="row bg-light border border-secondary rounded p-2 m-2" [class.border-danger]="!product.quantity">
+  <h2 class="tittle col-12 col-sm-8">{{product.name}}</h2>
+
+  <h3 *ngIf="!product.promotion" class="rounded text-right text-primary col-12 col-sm-4">{{product.price | number:'1.2'}} zł</h3>
+
+  <div *ngIf="product.promotion" class="col-12 col-sm-4">
+  <h3 class="rounded text-right text-danger" style="text-decoration: line-through">{{product.price | number:'1.2'}} zł</h3>
+  <h3 class="rounded text-right text-primary">{{product.promotion.newPrice}} zł</h3>
+  </div>
+
+  <div class="col-sm-2 col-12">
+    <img *ngIf="product.quantity" class="img-fluid" [src]='product.img'>
+    <img *ngIf="!product.quantity" class="img-fluid" src="assets/img/sold-out.png">
+  </div>
+  <p class="description col-sm-10 col-12">{{product.description}}</p>
+  <div class="text-primary text-right mb-2 offset-6 col-6 offset-sm-8 col-sm-4 offset-md-10 col-md-2">Dostępność w magazynie: {{product.quantity}}</div>
+  <button [class.disabled]="!product.quantity" (click)="product.quantity && cartService.addProduct(product)" class="offset-6 col-6 offset-sm-8 col-sm-4 offset-md-10 col-md-2 btn btn-outline-primary">Do koszyka</button>
+
+</div>

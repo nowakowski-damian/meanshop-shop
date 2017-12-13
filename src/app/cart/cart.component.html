@@ -1,0 +1,48 @@
+
+<div class="container">
+
+  <div class="row mt-4 mb-5">
+    <h1>Twój koszyk na zakupy</h1>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Ilość</th>
+          <th scope="col">Produkt</th>
+          <th scope="col">Cena</th>
+          <th scope="col">Wartość</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+
+      <tbody>
+      <tr *ngFor="let productElement of cartService.getProductsIterator()">
+        <td>{{productElement[1]}}</td>
+        <td>{{productElement[0].name}}</td>
+        <td>{{productElement[0].price | number:'1.2'}} zł</td>
+        <td>{{productElement[1]*productElement[0].price | number:'1.2'}} zł</td>
+        <td><i (click)="cartService.removeProduct(productElement[0])" class="material-icons text-danger" style="cursor: pointer">clear</i></td>
+      </tr>
+
+      <tr>
+        <td></td>
+        <td></td>
+        <th scope="col">Wartość całkowita:</th>
+        <th scope="col">{{cartService.totalAmount | number:'1.2'}} zł</th>
+        <td></td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <div class="row">
+    <div class="col-12 fixed-bottom mb-0 mb-sm-2 mb-lg-4">
+      <button routerLink="/offer" class="btn btn-primary float-left ml-0 ml-sm-2 ml-lg-4"><i class="material-icons align-middle">keyboard_arrow_left</i>Kontynuuj zakupy</button>
+      <button *ngIf="cartService.cartSize" routerLink="/order" class="btn btn-primary float-right mr-0 mr-sm-2 mr-lg-4">Złóż zamówienie<i class="material-icons align-middle">keyboard_arrow_right</i></button>
+    </div>
+  </div>
+
+</div>

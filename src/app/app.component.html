@@ -1,0 +1,20 @@
+
+
+<nav class="navbar navbar-light bg-light">
+  <a routerLink="/offer" class="navbar-brand">Sklep sportowy</a>
+  <div id="navbarText">
+    <div class="mr-auto"></div>
+    <span class="navbar-text">
+      Koszyk: {{ cartService.cartSize }} produkt(ów), {{ cartService.totalAmount | number:'1.2' }} zł
+      <button routerLink="/cart" type="button" class="ml-4 btn btn-primary">Do kasy</button>
+    </span>
+  </div>
+</nav>
+
+<router-outlet></router-outlet>
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+
+<div class="container-fluid">
+
+  <div *ngIf="!productsForCurrPage.length" class="row mt-5">
+    <div class="card text-white bg-danger" style="margin: auto; width: 20rem;">
+      <img class="card-img-top" src="assets/img/error.jpg">
+      <div class="card-body">
+        <p class="card-text">Brak wyników do wyświetlenia.</p>
+      </div>
+    </div>
+  </div>
+
+  <app-product *ngFor="let product of productsForCurrPage" [product]="product" (click)="product.quantity && onProductClicked(product)" ></app-product>
+
+  <div class="row fixed-bottom mb-0 mr-0 mb-sm-2 mr-sm-2 mb-lg-4 mr-lg-4">
+    <nav *ngIf="pages.length>1" class="col-12" >
+      <ul class="pagination float-right">
+        <li [class.disabled]="currentPage<=0" (click)="onPrevPage()" class="page-item"><a class="page-link">Wstecz</a></li>
+        <li *ngFor="let page of pages" [class.active]="page===currentPage+1" (click)="onPage(page)" class="page-item"><a class="page-link">{{page}}</a></li>
+        <li [class.disabled]="currentPage>=pages.length-1" (click)="onNextPage()" class="page-item"><a class="page-link">Dalej</a></li>
+      </ul>
+    </nav>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div *ngIf="currentProduct" class="modal fade" id="productModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{currentProduct.name}}</h5>
+        <button type="button" class="close" data-dismiss="modal">
+          <span>&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="col-12">
+          <img class="img-fluid" [src]='currentProduct.img'>
+        </div>
+        <p class="description col-12">{{currentProduct.longDescription}}</p>
+        <h3 class="rounded text-right text-primary col-12">Cena: {{currentProduct.price | number:'1.2'}} zł</h3>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="cartService.addProduct(currentProduct)">Do koszyka</button>
+      </div>
+    </div>
+  </div>
+</div>

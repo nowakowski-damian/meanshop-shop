@@ -1,0 +1,22 @@
+
+<button (click)="onMainPageButton()" [class.active]="noFilterActive" class="btn btn-light border border-secondary btn-block">Strona główna</button>
+<button *ngFor="let category of categories"
+        (click)="onFilterButton(category)"
+        [class.active]="filterMap.get(category.name)"
+        class="btn btn-light border border-secondary btn-block">{{category.name}}</button>
+
+<!--<form class="navbar-form navbar-left">-->
+  <!--<div class="form-group">-->
+    <!--<input type="text" class="form-control" placeholder="Search">-->
+  <!--</div>-->
+  <!--<span class="glyphicon glyphicon-search" aria-hidden="true"></span>-->
+
+  <!--<button type="submit" class="btn btn-default">Submit</button>-->
+<!--</form>-->
+
+<div class="input-group mt-2">
+  <input (keyup)="onFilterWord($event)" type="text" class="form-control" placeholder="Search">
+  <span class="input-group-addon"><i class="material-icons">&#xE8B6;</i></span>
+</div>
+
+
